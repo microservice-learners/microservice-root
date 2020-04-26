@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +27,10 @@ class ProductRepositoryTest {
         productRepository.save(product);
 
         List<Product> allProduct = productRepository.findAll();
-        Assertions.assertThat(allProduct.stream().findFirst().get()).isEqualTo(product);
+        Optional<Product> firstProduct = allProduct.stream().findFirst();
+        Assertions.assertThat(firstProduct.isPresent()).isTrue();
+        Assertions.assertThat(firstProduct.get()).isEqualTo(product);
+
     }
 
 }
