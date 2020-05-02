@@ -16,6 +16,7 @@ public class ProductService {
     ProductRepository productRepository;
 
     public boolean save(ProductDTO productDTO){
+        //BDO - by-passed
         Product product = new ProductTransformer().tranform(productDTO);
         productRepository.save(product);
         return true;
