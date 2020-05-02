@@ -1,7 +1,9 @@
 package com.edureka.ms.catalogueservice.service;
 
+import com.edureka.ms.catalogueservice.model.Product;
 import com.edureka.ms.catalogueservice.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,18 +15,27 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public void save(ProductDTO productDTO){
-        //Write a transformer which does the transformation;
-        //convert product dto into product
-        //save the product using repository
+    public boolean save(ProductDTO productDTO){
+        Product product = new ProductTransformer().tranform(productDTO);
+        productRepository.save(product);
+        return true;
     }
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
+    @Builder
     public static class ProductDTO{
         String name;
         String description;
     }
 
+    public static class ProductTransformer {
+        public Product tranform(ProductDTO productDTO) {
+            return Product.builder()
+                    .name(productDTO.getName())
+                    .description(productDTO.getDescription())
+                    .build();
+        }
+    }
 }
