@@ -27,8 +27,9 @@ public class ProductController {
     }
 
     @GetMapping
-    //GET http://localhost:8081/product?name=Edureka
-    public ResponseEntity<Boolean> isExists(@RequestParam String name){
+    //GET http://localhost:8081/product?name=Edureka&description=SomeDescription
+    public ResponseEntity<Boolean> isExists(@RequestParam(name = "name") String value,
+                                            @RequestParam(name = "descripton") String description){
         //Implement this
         return ResponseEntity.ok().body(true || false);
     }
