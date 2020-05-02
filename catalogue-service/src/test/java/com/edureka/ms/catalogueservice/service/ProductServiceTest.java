@@ -1,5 +1,6 @@
 package com.edureka.ms.catalogueservice.service;
 
+import com.edureka.ms.catalogueservice.model.Product;
 import com.edureka.ms.catalogueservice.repository.ProductRepository;
 import org.aspectj.lang.annotation.Before;
 import org.assertj.core.api.Assertions;
@@ -29,10 +30,12 @@ class ProductServiceTest {
                 .description("Edureka Description")
                 .build();
 
+        Product product = new ProductService.ProductTransformer().tranform(productDTO);
+
         boolean saved = productService.save(productDTO);
         Assertions.assertThat(saved).isTrue();
         Mockito.verify(productService.productRepository, Mockito.times(1)).save(Mockito.any());
-        //TODO - Use captor to capture the argument - in this you would get the handle of Product
+        //TODO - Use argumentCaptor to capture the argument - in this you would get the handle of Product
 
         //Assert that product
     }
