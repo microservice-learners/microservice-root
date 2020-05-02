@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,12 +36,37 @@ class ProductRepositoryTest {
 
     @Test
     public void shouldSaveManyProduct(){
-        //TODO
+        Product firstProduct = Product.builder()
+                .name("Some Name")
+                .description("Some Description")
+                .build();
+
+        Product secondProduct = Product.builder()
+                .name("Some Name")
+                .description("Some Description")
+                .build();
+
+        productRepository.saveAll(Arrays.asList(firstProduct, secondProduct));
+
+        List<Product> all = productRepository.findAll();
+
+        Assertions.assertThat(all).size().isEqualTo(2);
+
     }
 
     @Test
     public void shouldSearchByName(){
-        //TODO - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference
+        Product firstProduct = Product.builder()
+                .name("Some Name")
+                .description("Some Description")
+                .build();
+
+        productRepository.save(firstProduct);
+
+        Optional<Product> byName = productRepository.findByName(firstProduct.getName());
+
+        Assertions.assertThat(byName).isNotEmpty();
+        Assertions.assertThat(byName.get()).isEqualTo(firstProduct);
     }
 
 }
