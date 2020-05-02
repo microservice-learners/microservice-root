@@ -33,4 +33,14 @@ class ProductRepositoryTest {
 
     }
 
+    @Test
+    public void shouldSaveManyProduct(){
+        //TODO
+    }
+
+    @Test
+    public void shouldSearchByName(){
+        //TODO - https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference
+    }
+
 }
