@@ -22,6 +22,10 @@ public class ProductService {
         return true;
     }
 
+    public boolean isExists(String name){
+        return productRepository.findByName(name).isPresent();
+    }
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
