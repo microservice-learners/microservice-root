@@ -1,2 +1,3 @@
 rootProject.name = 'microservice-root'
 include 'catalogue-service'
+include 'discovery-server'
