@@ -7,6 +7,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -34,10 +36,14 @@ class ProductServiceSolitaryTest {
 
         boolean saved = productService.save(productDTO);
         Assertions.assertThat(saved).isTrue();
-        Mockito.verify(productService.productRepository, Mockito.times(1)).save(Mockito.any());
+
+        ArgumentCaptor<Product> captor =  ArgumentCaptor.forClass(Product.class);
+
+        Mockito.verify(productService.productRepository, Mockito.times(1)).save(captor.capture());
         //TODO - Use argumentCaptor to capture the argument - in this you would get the handle of Product
 
-        //Assert that product
+        Product productReal = captor.getValue();
+        Assertions.assertThat(productReal).isEqualTo(product);
     }
 
 }
