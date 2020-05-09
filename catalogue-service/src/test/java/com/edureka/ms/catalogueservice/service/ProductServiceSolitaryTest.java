@@ -40,8 +40,6 @@ class ProductServiceSolitaryTest {
         ArgumentCaptor<Product> captor =  ArgumentCaptor.forClass(Product.class);
 
         Mockito.verify(productService.productRepository, Mockito.times(1)).save(captor.capture());
-        //TODO - Use argumentCaptor to capture the argument - in this you would get the handle of Product
-
         Product productReal = captor.getValue();
         Assertions.assertThat(productReal).isEqualTo(product);
     }
