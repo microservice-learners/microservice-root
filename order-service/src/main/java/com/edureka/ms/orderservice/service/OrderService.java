@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -64,5 +65,9 @@ public class OrderService {
         Integer quantity;
 
         String address;
+
+        public boolean isValid() {
+            return StringUtils.isNotEmpty(userId) && true;
+        }
     }
 }
