@@ -5,4 +5,7 @@ spring:
     name: order-service
   jpa:
     show-sql: true
+  sleuth:
+    sampler:
+      probability: 1
 

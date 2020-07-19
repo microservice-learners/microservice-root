@@ -5,3 +5,11 @@ spring:
     name: catalogue-service
   jpa:
     show-sql: true
+  sleuth:
+    sampler:
+      probability: 1
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
